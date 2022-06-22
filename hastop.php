@@ -304,7 +304,7 @@ $jml_kriteria =count($kriteria);
                       
                       $min[$i-1] = $y['Harga'][$i-1];
                         
-                      $max[$i-1] = ($y['Pigmentasi'][$i])+($y['Variasi Shade'][$i])+($y['Ketahanan'][$i])+($y['Transferproof'][$i]);
+                      $max[$i-1] = ($y['Pigmentasi'][$i-1])+($y['Variasi Shade'][$i-1])+($y['Ketahanan'][$i-1])+($y['Transferproof'][$i-1]);
 
                       $yi[$i-1] = $max[$i-1] - $min[$i-1];
                       
@@ -368,7 +368,7 @@ $jml_kriteria =count($kriteria);
                 <tbody>
                   <?php
                   $i=0;
-                  $V=array();
+                  // $V=array();
 
                   arsort($yi);
                   $index=key($yi);
@@ -379,9 +379,9 @@ $jml_kriteria =count($kriteria);
                       <th>A{$i}</th>
                       <td>{$nama}</td>";
                     foreach($kriteria as $k){
-                      $V[$i-1]=$yi[$i-1];
+                      $yi[$i-1];
                     }
-                    echo "<td>{$V[$i-1]}</td></tr>\n";
+                    echo "<td>{$yi[$i-1]}</td></tr>\n";
                   }
                   ?>
                 </tbody>
@@ -391,7 +391,7 @@ $jml_kriteria =count($kriteria);
             <div class="panel-heading">
               Urut
             </div>
-            <div class="panel-body">
+            <!-- <div class="panel-body">
               <table class="table table-striped table-bordered table-hover">
                 <thead>
                   <tr>
@@ -403,33 +403,35 @@ $jml_kriteria =count($kriteria);
                 </thead>
                 <tbody>
                   <?php
-                  $i=0;
-                  $V=array();
+                  // $i=0;
+                  // $V=array();
 
-                  //--mengurutkan data secara descending dengan tetap mempertahankan key/index array-nya
-                  arsort($yi);
-                  //-- mendapatkan key/index item array yang pertama
-                  $index=key($yi,SORT_DESC,$yi);
+                  // //--mengurutkan data secara descending dengan tetap mempertahankan key/index array-nya
+                  // arsort($yi);
+                  // //-- mendapatkan key/index item array yang pertama
+                  // $index=key($yi,SORT_DESC,$yi);
                   
-                  foreach($data as $nama=>$krit){
-                    echo "<tr>
-                      <td>".(++$i)."</td>
-                      <th>A{$i}</th>
-                      <td>{$nama}</td>";
-                    foreach($kriteria as $k){
-                      // $V[$i-1]=$yi[$i-1];
+                  // foreach($data as $nama=>$krit){
+                  //   echo "<tr>
+                  //     <td>".(++$i)."</td>
+                  //     <th>A{$i}</th>
+                  //     <td>{$nama}</td>";
+                  //   foreach($kriteria as $k){
+                  //     // $V[$i-1]=$yi[$i-1];
                       
-                      foreach ($yi as $id_yi => $value) {
-                        echo $yi[$id_yi][0].$id_yi."<br>".$yi[$id_yi];
+                  //     foreach ($yi as $id_yi => $value) {
+                  //       echo $yi[$id_yi][0].$id_yi."<br>".$yi[$id_yi];
                         
-                      }
-                    }
-                    echo "<td>{$yi[$i-1]}</td></tr>\n";
-                  }
+                  //     }
+                  //   }
+                  //   echo "<td>{$yi[$i-1]}</td></tr>\n";
+                  // }
+
+
                   ?>
                 </tbody>
               </table>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

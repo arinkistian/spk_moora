@@ -44,9 +44,6 @@ include ("koneksi.php");
               <a href="alternatif.php">Alternatif</a>
             </li>
             <li>
-              <a href="poin.php">Poin</a>
-            </li>
-            <li>
               <a href="nilmat.php">Nilai Matriks</a>
             </li>
             <li>
