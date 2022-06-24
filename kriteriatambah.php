@@ -46,7 +46,7 @@ if ($datakode) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">SPK Metode MOORA</a>
+          <a class="navbar-brand" href="index.php">Website Rekomendasi Liptint</a>
         </div>
 
         <div class="collapse navbar-collapse">
@@ -64,7 +64,7 @@ if ($datakode) {
               <a href="nilmat.php">Nilai Matriks</a>
             </li>
             <li>
-              <a href="hastop.php">Hasil Moora</a>
+              <a href="hastop.php">Hasil Rekomendasi</a>
             </li>
           </ul>
         </div>

@@ -32,7 +32,7 @@ include ("koneksi.php");
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">SPK Metode MOORA</a>
+          <a class="navbar-brand" href="index.php">Website Rekomendasi Liptint</a>
         </div>
 
         <div class="collapse navbar-collapse">
@@ -47,7 +47,7 @@ include ("koneksi.php");
               <a href="nilmat.php">Nilai Matriks</a>
             </li>
             <li>
-              <a href="hastop.php">Hasil Moora</a>
+              <a href="hastop.php">Hasil Rekomendasi</a>
             </li>
           </ul>
         </div>
@@ -65,10 +65,10 @@ include ("koneksi.php");
 
                 <ul class="nav nav-tabs">
                     <li class="active">
-                      <a href="alternatif.php" data-toggle="tab">Tabel Alternatif</a>
+                      <a href="alternatif.php" data-toggle="tab">Tabel Alternatif Liptint</a>
                     </li>
                     <li>
-                      <a href="alternatiftambah.php" data-toggle="tab">Tambah Alternatif</a>
+                      <a href="alternatiftambah.php" data-toggle="tab">Tambah Alternatif Liptint</a>
                     </li>
                 </ul>
 

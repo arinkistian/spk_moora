@@ -3,6 +3,10 @@
 session_start();
 include ("koneksi.php");
 
+$alternatif = (isset($_POST['alternatif'])) ? trim($_POST['alternatif']) : '';
+$nama_alternatif = (isset($_POST['nama_alternatif'])) ? trim($_POST['nama_alternatif']) : '';
+$nilai = (isset($_POST['nilai'])) ? trim($_POST['nilai']) : '';
+
 $tampil = $koneksi->query("SELECT b.nama_alternatif,c.nama_kriteria,a.nilai,c.bobot
       FROM
         tab_topsis a
@@ -16,6 +20,7 @@ $kriterias =array();
 $bobot     =array();
 $nilai_kuadrat =array();
 $sample=array();
+$yif=array();
 
 if ($tampil) {
   while($row=$tampil->fetch_object()){
@@ -37,6 +42,19 @@ if ($tampil) {
 
 $kriteria     =array_unique($kriterias);
 $jml_kriteria =count($kriteria);
+
+if (isset($_POST['simpan'])) {
+  $tambah = $koneksi->query($sql);
+
+  if ($row = $tambah->fetch_row()) {
+    $masuk = "INSERT INTO tab_nilai (id_nilai, alternatif, nama_alternatif, nilai) VALUES ('".$id_nilai."','".$alternatif."','".$nama_alternatif."','".$nilai."')";
+    $buat  = $koneksi->query($masuk);
+
+    echo "<script>alert('Input Data Berhasil') </script>";
+    // echo "<script>window.location.href = \"alternatif.php\" </script>";
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +81,7 @@ $jml_kriteria =count($kriteria);
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">SPK Metode Topsis</a>
+          <a class="navbar-brand" href="index.php">Website Rekomendasi Liptint</a>
         </div>
 
         <div class="collapse navbar-collapse">
@@ -78,7 +96,7 @@ $jml_kriteria =count($kriteria);
               <a href="nilmat.php">Nilai Matriks</a>
             </li>
             <li>
-            <a href="hastop.php">Hasil Moora</a>
+            <a href="hastop.php">Hasil Rekomendasi</a>
             </li>
           </ul>
         </div>
@@ -87,7 +105,8 @@ $jml_kriteria =count($kriteria);
 
     <!--tabel-tabel-->
     <div class="container"> <!--container-->
-      <div class="row">
+    <!-- matriks kriteria -->
+      <!-- <div class="row">
       	<div class="col-lg-8 col-lg-offset-2">
       	  <div class="panel panel-default">
       	    <div class="panel-heading">
@@ -142,9 +161,10 @@ $jml_kriteria =count($kriteria);
             </div>
       	  </div>
       	</div>
-      </div>
+      </div> -->
 
-      <div class="row">
+      <!-- matriks normalisasi -->
+      <!-- <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -204,9 +224,10 @@ $jml_kriteria =count($kriteria);
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="row">
+      <!-- matriks terbobot -->
+      <!-- <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -215,26 +236,7 @@ $jml_kriteria =count($kriteria);
             <div class="panel-body">
               <table class="table table-striped table-bordered table-hover">
                 <!-- menampilkan data -->
-              <thead>
-                  <tr>
-                    <th rowspan='3'>No</th>
-                    <th rowspan='3'>Alternatif</th>
-                    <th rowspan='3'>Nama</th>
-                    <th colspan='<?php echo $jml_kriteria;?>'>Kriteria</th>
-                  </tr>
-                  <tr>
-                    <?php
-                    foreach($kriteria as $k)
-                      echo "<th>$k</th>\n";
-                    ?>
-                  </tr>
-                  <tr>
-                    <?php
-                    for($n=1;$n<=$jml_kriteria;$n++)
-                      echo "<th>K$n</th>";
-                    ?>
-                  </tr>
-                </thead>
+              
                 
                 <!-- proses normalisasi matrix -->
                 <tbody>
@@ -242,10 +244,10 @@ $jml_kriteria =count($kriteria);
                   $i=0;
                   $normal=array();
                   foreach($data as $nama=>$krit){
-                    echo "<tr>
-                      <td>".(++$i)."</td>
-                      <th>A{$i}</th>
-                      <td>{$nama}</td>";
+                   
+
+                      ++$i;
+                      
                       
                       foreach($kriteria as $k){
                       // $pembagi=0;
@@ -256,24 +258,25 @@ $jml_kriteria =count($kriteria);
                       //   $normal[$id_alternatif][$id_kriteria]/=sqrt($pembagi);
                       // }
                       $y[$k][$i-1]=round(($krit[$k]/sqrt($nilai_kuadrat[$k])),4)*$bobot[$k];
-                      echo "<td align='center'>".$y[$k][$i-1]."</td>";
+                      $y[$k][$i-1];
                       
                     }                    
                     echo
                      "</tr>\n";
                   }
-                  foreach ($kriteria as $k) {
-                    echo $k;
-                  }
+                  // foreach ($kriteria as $k) {
+                  //   echo $k;
+                  // }
                   ?>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-      </div>
+      <!-- </div>  -->
 
-      <div class="row">
+      <!-- penentuan nilai Yi -->
+      <!-- <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -295,6 +298,8 @@ $jml_kriteria =count($kriteria);
 
                   
                   $i=0;
+                  $simpan_array=array();
+                  // $yif=array();
                   // $optimasi=array();
 
                   foreach($data as $nama=>$krit){
@@ -306,35 +311,19 @@ $jml_kriteria =count($kriteria);
                         
                       $max[$i-1] = ($y['Pigmentasi'][$i-1])+($y['Variasi Shade'][$i-1])+($y['Ketahanan'][$i-1])+($y['Transferproof'][$i-1]);
 
-                      $yi[$i-1] = $max[$i-1] - $min[$i-1];
-                      
-                      
+                      $yif = $max[$i-1] - $min[$i-1];
+                      // $yi[$i-1] = $yif;
+
+                      $simpan_array[]=array('nama'=>$nama
+                      ,'max'=>$max[$i-1]
+                  ,'min'=>$min[$i-1]
+                ,'yif'=>$yif);
+
+
                       
                       echo "<td align='center'>".$max[$i-1]."</td>";
                       echo "<td align='center'>".$min[$i-1]."</td>";
-                      echo "<td align='center'>".$yi[$i-1]."</td>";
-
-                      // foreach($kriteria as $k){
-
-                      
-
-                      //   echo "<td align='center'>".$max[$k][$i-1]."</td>";
-                      //   // echo "<td align='center'>".$min[$k][$i-1]."</td>";                        
-                      // }
-
-                      // foreach($kriteria as $k){
-
-                      //   if ($k == 'Harga') {
-                      //     $min[$k][$i-1] = $y[$k][$i-1];
-                      //   } else {
-                      //     $max[$k][$i-1] = $y[$k][$i];
-                      //   }
-
-                      //   // echo "<td align='center'>".$max[$k][$i-1]."</td>";
-                      //   echo "<td align='center'>".$min[$k][$i-1]."</td>";
-
-                        
-                      // }
+                      echo "<td align='center'>".$yif."</td>";
                       
                       echo
                      "</tr>\n";
@@ -344,10 +333,11 @@ $jml_kriteria =count($kriteria);
                   ?>
                 </tbody>
               </table>
+              
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
@@ -366,72 +356,35 @@ $jml_kriteria =count($kriteria);
                   </tr>
                 </thead>
                 <tbody>
-                  <?php
-                  $i=0;
-                  // $V=array();
+                <?php
+        $sorting_data = array();
+        foreach ($simpan_array as $key => $row) {
+          $sorting_data[$key] = $row['yif'];
+        }
 
-                  arsort($yi);
-                  $index=key($yi);
-                  
-                  foreach($data as $nama=>$krit){
-                    echo "<tr>
-                      <td>".(++$i)."</td>
-                      <th>A{$i}</th>
-                      <td>{$nama}</td>";
-                    foreach($kriteria as $k){
-                      $yi[$i-1];
-                    }
-                    echo "<td>{$yi[$i-1]}</td></tr>\n";
-                  }
-                  ?>
+        // Sort the with asc;
+        array_multisort($sorting_data, SORT_DESC, $simpan_array);
+        ?>
+        <?php if ($simpan_array) { ?>
+          <?php $number = 1; ?>
+          <?php foreach ($simpan_array as $sa) { ?>
+            <tr>
+              <td><?= $number; ?></td>
+              <td><b>A<?= $number; ?></b></td>
+              <td><?= $sa['nama'] ?></td>
+              <td><?= $sa['yif']; ?></td>
+            </tr>
+            <?php $number++; ?>
+          <?php } ?>
+        <?php } else { ?>
+          <tr>
+            <td colspan="4" style="text-align: center;">Data tidak tersedia.</td>
+          </tr>
+        <?php } ?>
                 </tbody>
               </table>
             </div>
 
-            <div class="panel-heading">
-              Urut
-            </div>
-            <!-- <div class="panel-body">
-              <table class="table table-striped table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Alternatif</th>
-                    <th>Nama</th>
-                    <th>Nilai</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  // $i=0;
-                  // $V=array();
-
-                  // //--mengurutkan data secara descending dengan tetap mempertahankan key/index array-nya
-                  // arsort($yi);
-                  // //-- mendapatkan key/index item array yang pertama
-                  // $index=key($yi,SORT_DESC,$yi);
-                  
-                  // foreach($data as $nama=>$krit){
-                  //   echo "<tr>
-                  //     <td>".(++$i)."</td>
-                  //     <th>A{$i}</th>
-                  //     <td>{$nama}</td>";
-                  //   foreach($kriteria as $k){
-                  //     // $V[$i-1]=$yi[$i-1];
-                      
-                  //     foreach ($yi as $id_yi => $value) {
-                  //       echo $yi[$id_yi][0].$id_yi."<br>".$yi[$id_yi];
-                        
-                  //     }
-                  //   }
-                  //   echo "<td>{$yi[$i-1]}</td></tr>\n";
-                  // }
-
-
-                  ?>
-                </tbody>
-              </table>
-            </div> -->
           </div>
         </div>
       </div>

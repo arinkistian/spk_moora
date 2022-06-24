@@ -40,7 +40,7 @@ while ($row = $kriteria->fetch_row())
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">SPK Metode MOORA</a>
+          <a class="navbar-brand" href="index.php">Website Rekomendasi Liptint</a>
         </div>
 
         <div class="collapse navbar-collapse">

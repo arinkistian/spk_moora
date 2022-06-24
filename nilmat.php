@@ -61,7 +61,7 @@ $tambah = $koneksi->query('SELECT * FROM tab_topsis');
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">SPK Metode Moora</a>
+          <a class="navbar-brand" href="index.php">Website Rekomendasi Liptint</a>
         </div>
 
         <div class="collapse navbar-collapse">
@@ -76,7 +76,7 @@ $tambah = $koneksi->query('SELECT * FROM tab_topsis');
               <a href="nilmat.php">Nilai Matriks</a>
             </li>
             <li>
-              <a href="hastop.php">Hasil Moora</a>
+              <a href="hastop.php">Hasil Rekomendasi</a>
             </li>
           </ul>
         </div>
@@ -133,7 +133,7 @@ $tambah = $koneksi->query('SELECT * FROM tab_topsis');
                               </select>
                             </div>
                             <div class="form-group">
-                              <input class="form-control" type="text" name="nilai_kr" placeholder="Nilai">
+                              <input class="form-control" type="text" name="nilai_kr" placeholder="Nilai (pemberian nilai sesuai dengan tabel di bawah ini)">
                             </div>
                             <div class="form-group">
                               <input class="btn btn-success" type="submit" name="simpan" value="Process">
@@ -144,6 +144,111 @@ $tambah = $koneksi->query('SELECT * FROM tab_topsis');
                     </div>
                   </div>
                 </div>
+
+                <!--tabel penentuan nilai-->
+        <!-- <div class="container"> container -->
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  Tabel Pigmentasi
+                </div>
+                <div class="panel-body">
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th align="center">Sub Kriteria</th>
+                        <th>Nilai</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Sangat Pigmented</td>
+                        <td>4</td>
+                      </tr>
+                      <tr>
+                        <td>Cukup Pigmented</td>
+                        <td>3</td>
+                      </tr>
+                      <tr>
+                        <td>Kurang Pigmented</td>
+                        <td>2</td>
+                      </tr>
+                      <tr>
+                        <td>Tidak Pigmented</td>
+                        <td>1</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  Tabel Ketahanan
+                </div>
+                <div class="panel-body">
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th align="center">Sub Kriteria</th>
+                        <th>Nilai</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Sangat Tahan</td>
+                        <td>4</td>
+                      </tr>
+                      <tr>
+                        <td>Cukup Tahan</td>
+                        <td>3</td>
+                      </tr>
+                      <tr>
+                        <td>Kurang Tahan</td>
+                        <td>2</td>
+                      </tr>
+                      <tr>
+                        <td>Tidak Tahan</td>
+                        <td>1</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  Tabel Transferproof
+                </div>
+                <div class="panel-body">
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th align="center">Sub Kriteria</th>
+                        <th>Nilai</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Transferproof</td>
+                        <td>1</td>
+                      </tr>
+                      <tr>
+                        <td>Tidak Transferproof</td>
+                        <td>0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          <!-- </div> -->
+        </div class><!--container-->
 
               <!--tabel-tabel-->
               <div class="row">
@@ -281,110 +386,7 @@ $tambah = $koneksi->query('SELECT * FROM tab_topsis');
           </div> <!--row-->
         </div> <!--container-->
 
-        <!--tabel penentuan nilai-->
-        <div class="container"> <!--container-->
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  Tabel Pigmentasi
-                </div>
-                <div class="panel-body">
-                  <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th align="center">Sub Kriteria</th>
-                        <th>Nilai</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Sangat Pigmented</td>
-                        <td>4</td>
-                      </tr>
-                      <tr>
-                        <td>Cukup Pigmented</td>
-                        <td>3</td>
-                      </tr>
-                      <tr>
-                        <td>Kurang Pigmented</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td>Tidak Pigmented</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  Tabel Ketahanan
-                </div>
-                <div class="panel-body">
-                  <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th align="center">Sub Kriteria</th>
-                        <th>Nilai</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Sangat Tahan</td>
-                        <td>4</td>
-                      </tr>
-                      <tr>
-                        <td>Cukup Tahan</td>
-                        <td>3</td>
-                      </tr>
-                      <tr>
-                        <td>Kurang Tahan</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td>Tidak Tahan</td>
-                        <td>1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  Tabel Transferproof
-                </div>
-                <div class="panel-body">
-                  <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th align="center">Sub Kriteria</th>
-                        <th>Nilai</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Transferproof</td>
-                        <td>1</td>
-                      </tr>
-                      <tr>
-                        <td>Tidak Transferproof</td>
-                        <td>0</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div><!--container-->
+        
 
         <!--footer-->
         <footer class="text-center">
@@ -401,21 +403,7 @@ $tambah = $koneksi->query('SELECT * FROM tab_topsis');
 
        
 
-    // if (isset($_POST['simpan'])) {
-    //   $id_nilai   = $_POST['id_nilai'];
-    //   $id_alter   = $_POST['altern'];
-    //   $id_krit   = $_POST['krit'];
-    //   $nilai_kr = $_POST['nilai_kr'];
-      
-    //   $sql    = "SELECT * FROM tab_nilai";
-    //   $tambah = $koneksi->query($sql);
 
-    //   if ($row = $tambah->fetch_row()) {
-    //     $masuk = "INSERT INTO tab_nilai VALUES ('".$id_nilai."','".$id_alter."','".$id_krit."','".$nilai_kr."')";
-    //     $buat  = $koneksi->query($masuk);
-
-    //   }
-    // }
 
      
 
